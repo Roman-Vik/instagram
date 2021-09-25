@@ -24,9 +24,25 @@
 }
 
 .profHead {
+    position: relative;
     width: 100%;
     display: flex;
     flex-direction: column;
+}
+.profHead__error{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100px;
+    background: #dd326e;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    display: none;
+}
+.profHead__error_visible{
+    display: block;
 }
 
 .profHead__up {
@@ -159,6 +175,24 @@
 .main {
     width: 100%;
 }
+.main__like{
+    margin: auto;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #dd326e;
+    display: none;
+    transition: 5s;
+}
+
+.main__like_visible{
+    display: block;
+    transition: 5s;
+}
 
 .main__push-btns {
     width: 100%;
@@ -290,6 +324,7 @@
     width: 100%;
 }
 .main__post{
+    position: relative;
     background-repeat: no-repeat;
     width: 33%;
     height: 337.9px;

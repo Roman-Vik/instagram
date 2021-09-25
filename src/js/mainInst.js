@@ -5,29 +5,37 @@ class Insta {
         this.list = posts // 97 трока
     }
 
-    init(){ // методы
-        // this.createDom(this.list) // 4 строка
+    init() { // методы
+        // this.addEvent()
         this.getResponse()
-        this.createDomNew()
+        // this.createDomNew()
+
     }
 
-    createDomNew(){
+    addEvent(){
+        const post = document.querySelector('.main__post')
+        post.addEventListener('click', ()=>{
+
+        })
+    }
+
+    createDomNew() {
         const arr = [
             {
-                text:'1',
+                text: '1',
                 name: 'elem'
             },
             {
-                text:'22222',
+                text: '22222',
                 name: 'item'
             },
             {
-                text:'3333333',
+                text: '3333333',
                 name: 'el'
             },
         ]
         const domNew = document.querySelector('.dom-new')
-        for (let i = 0; i < arr.length; i++){
+        for (let i = 0; i < arr.length; i++) {
             const elem = document.createElement('div')
             // elem.classList.add('main__post main__post_elem') // первая итерация
             // elem.classList.add('main__post main__post_item')
@@ -39,35 +47,7 @@ class Insta {
             domNew.append(elem)
         }
     }
-
-    createDom(arr){ // 8 строка
-     /*   const pix = document.querySelector('.main__pix')
-        for(let i = 0; i < arr.length; i++){
-            const post = document.createElement('div')
-            post.classList.add('main__post')
-            const img = document.createElement('img')
-            img.classList.add('main__img')
-            img.src = arr[i].src
-            post.append(img)
-            pix.append(post)
-        }*/
-
-
-
-        const pix = document.querySelector('.main__pix')
-        for (let i = 0; i < arr.length; i++){
-            const post = document.createElement('div')
-            post.classList.add('main__post')
-            const img = document.createElement('img')
-            img.classList.add('main__img')
-            img.src = arr[i]
-            post.append(img)
-            pix.append(post)
-
-        }
-    }
-
-    getResponse () {
+    getResponse() {
         // отличие POST & GET
         /*
         * get https://jsonplaceholder.typicode.com/users ? name=alex & age=10
@@ -77,55 +57,87 @@ class Insta {
         * age: 10
         * }
         * */
-    /*    fetch('https://jsonplaceholder.typicode.com/users',{
-            method: 'POST',
-            body:
-        })*/
+        /*    fetch('https://jsonplaceholder.typicode.com/users',{
+                method: 'POST',
+                body:
+            })*/
         const postID = 1
         const link = `https://jsonplaceholder.typicode.com/comments?postId=${postID}`
         fetch(link)
-            .then(response => response.json()) // метод получения данных в json
+            .then(response => {
+                if(response.status === 404){
+                 this.showNotification()
+                }
+                return response.json()
+            }) // метод получения данных в json
             .then(res => {
                 // создать метод который будет работать с данными (создать нужно квадраты с email)
                 // this.workWithData(res)
                 //здесь начать
-               this.cycle(res)
-
+                this.cycle(res)
+            })
+            .catch(error =>{
+                console.log("error", error)
             })
     }
-        cycle(res){
-                const mainPix = document.querySelector('.main__pix')
-                console.log('res', res)
-                for(let i = 0; i < res.length; i++){
-                    const mainPost = document.createElement('div')
-                    mainPost.classList.add('main__post')
 
-                    const mainName = document.createElement('h2')
-                    mainName.classList.add('main__name')
-                    mainName.textContent = res[i].name
-                    const mainEmail = document.createElement('h1')
-                    mainEmail.classList.add('main__email')
-                    mainEmail.textContent = res[i].email
-                    const mainText = document.createElement('p')
-                    mainText.classList.add('main__text')
-                    mainText.textContent = res[i].body
+    showNotification(){
+        const profHeadError = document.querySelector('.profHead__error')
+        profHeadError.classList.add('profHead__error_visible')
+    }
 
-                    mainPost.append(mainName, mainEmail, mainText)
-                    mainPix.append(mainPost)
+    cycle(res) {
+        const mainPix = document.querySelector('.main__pix')
+        console.log('res', res)
+        for (let i = 0; i < res.length; i++) {
+            const mainPost = document.createElement('div')
+            mainPost.classList.add('main__post')
+
+            const mainName = document.createElement('h2')
+            mainName.classList.add('main__name')
+            mainName.textContent = res[i].name
+            const mainEmail = document.createElement('h1')
+            mainEmail.classList.add('main__email')
+            mainEmail.textContent = res[i].email
+            const mainText = document.createElement('p')
+            mainText.classList.add('main__text')
+            mainText.textContent = res[i].body
+
+            const mainLike = document.createElement('div')
+            mainLike.classList.add('main__like')
+
+
+            mainPost.addEventListener('click', function() {
+                /*
+                setTimeout(()=>{
+                    mainLike.classList.remove('main__like_visible')
+                },5000)
+                */
+                if(mainLike.classList.contains('main__like_visible')){
+                   mainLike.classList.remove('main__like_visible')
+                }else {
+                    mainLike.classList.add('main__like_visible')
                 }
+            })
+           /* mainPost.addEventListener('mouseleave', ()=>{
+                mainLike.classList.remove('main__like_visible')
+            })*/
+            mainPost.append(mainName, mainEmail, mainText, mainLike)
+
+
+            mainPix.append(mainPost)
 
         }
 
-    workWithData (data) {
-       for (let i in data.src) {
-           data.append(postList)
-       }
+    }
+
+    workWithData(data) {
+        for (let i in data.src) {
+            data.append(postList)
+        }
         console.log('data', data)
     }
 }
-
-
-
 
 
 const postList = [ // данные с сервера
@@ -147,7 +159,7 @@ const postList = [ // данные с сервера
 ]
 
 const objInsta = {
-    init (){
+    init() {
         console.log(this.name)
         // this.createDom()
     },
@@ -155,7 +167,7 @@ const objInsta = {
     //     console.log(this.name)
     //     this.createDom()
     // },
-    createDom (){
+    createDom() {
         console.log('dom')
     },
     name: 'alex'
@@ -190,14 +202,6 @@ arr.sort()
 //
 // const bmw = new Car(100, 'bmw')
 // const mers = new Car(100, 'mers')
-
-
-
-
-
-
-
-
 
 
 // const arr = [1,2,3,4]

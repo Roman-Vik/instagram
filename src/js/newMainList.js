@@ -6,6 +6,12 @@ class Insta {
     init() {
         this.mainDomElements()
         this.serverRequestPhoto()
+        this.getHightLights()
+    }
+
+
+    getHightLights(){
+        fetch('https://www.instagram.com/graphql/query/?query_hash=d4d88dc1500312af6f937f7b804c68c3&variables={"user_id":"25025320","include_chaining":false,"include_reel":false,"include_suggested_users":false,"include_logged_out_extras":true,"include_highlight_reels":true,"include_live_status":false}')
     }
 
     serverRequestPhoto() {
@@ -23,7 +29,7 @@ class Insta {
     }
 
     mainDomElements(json) {
-        let arr = json
+        const arr = json
         const photoArea = document.querySelector('.footer__icons-bottom')
         for (let key in arr) {
             let cellFoto = document.createElement('img')
@@ -33,13 +39,10 @@ class Insta {
             cellFoto.alt = 'background'
             photoArea.append(cellFoto)
             cellFoto.addEventListener('click', function () {
-                /*window.open(`${json[key].url}`)*/
-               css(cellFoto, {
-                   ' transform':'scale(1,2)',
-                   'box-shadow':'4px 4px 8px 0px rgba(34, 60, 80, 0.2)'
-               });
+                window.open(`${arr[key].url}`)
 
-
+                /*cellFoto.style.boxShadow = '4px 4px 8px 0px rgba(34, 60, 80, 0.2)'
+                cellFoto.style.transform = 'scale(1,2)'*/
 
                 /*cellFoto.style.transform = `scale(1.2)`;*/
                 /*при нажатии на кнопку открывать ссылку с картинкой в новом окне(октл функционал перед решением второго задания )

@@ -121,7 +121,7 @@
     border-radius: 50%;
     width: 100%;
     height: 100%;
-    background: url('../png/600px-Instagram_icon.png');
+    background: url('../img/600px-Instagram_icon.png');
     background-size: 173px;
 }
 
@@ -304,16 +304,16 @@
 }
 .main__icon_grid {
     margin-top: 10px;
-    background-image: url("../png/Grid.png");
+    background-image: url("../img/Grid.png");
 }
 .main__icon_tv {
-    background-image: url("../png/IGTV.png");
+    background-image: url("../img/IGTV.png");
 }
 .main__icon_location {
-    background-image: url("../png/Location Icon.png");
+    background-image: url("../img/Location Icon.png");
 }
 .main__icon_save {
-    background-image: url("../png/Save.png");
+    background-image: url("../img/Save.png");
 }
 .main__pix{
     display: flex;
@@ -341,17 +341,15 @@
 /*33333333333333333333333333333333*/
 .footer__icons-bottom{
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     width: 100%;
     margin: 5px;
 }
-.footer__icon-menu{
-    background-repeat: no-repeat;
-    background-image: url("../png/Menu.png");
-    width: 595px;
-    height: 53px;
-}
-.footer__icon{
-    width: 44px;
-    height: 53px;
+.footer__cell {
+    width: 33.3%;
+    height: 309px;
+    border: #0060ff 1px solid;
+   /* box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    transform: scale(1,2);*/
 }

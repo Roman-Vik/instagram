@@ -6,13 +6,18 @@ class Insta {
     init() {
         this.mainDomElements()
         this.serverRequestPhoto()
-        this.getHightLights()
+        this.getHighLights()
     }
 
 
-    getHightLights(){
-        fetch('https://www.instagram.com/graphql/query/?query_hash=d4d88dc1500312af6f937f7b804c68c3&variables={"user_id":"25025320","include_chaining":false,"include_reel":false,"include_suggested_users":false,"include_logged_out_extras":true,"include_highlight_reels":true,"include_live_status":false}')
+    getHighLights(){
+        fetch('https://gitlab.com/R.Victorovich/instprogect/-/raw/master/src/server/highLights.json')
+            .then(response => response.json())
+            .then(response => {
+                console.log('res', response)
+            })
     }
+
 
     serverRequestPhoto() {
         fetch('https://jsonplaceholder.typicode.com/photos',)
